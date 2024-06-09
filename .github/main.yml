@@ -1,27 +1,27 @@
 name: Deploy to Surge
 on:
-push:
-branches:
-- main
+  push:
+    branches:
+      - main
 
 jobs:
-deploy:
-runs-on: ubuntu-latest
+  deploy:
+    runs-on: ubuntu-latest
 
-steps:
-- name: Checkout code
-  uses: actions/checkout@v2
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-- name: Install Node.js
-  uses: actions/setup-node@v2
-  with:
-    node-version: '14'
+      - name: Install Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
 
-- name: Install Surge
-  run: npm install -g surge
+      - name: Install Surge
+        run: npm install -g surge
 
-- name: Deploy to Surge
-  env:
-    SURGE_LOGIN: \${{ secrets.SURGE_LOGIN }}
-    SURGE_TOKEN: \${{ secrets.SURGE_TOKEN }}
-  run: surge ./ https://andres-20220776.surge.sh"
+      - name: Deploy to Surge
+        env:
+          SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
+          SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
+        run: surge ./ https://andres-20220776.surge.sh
